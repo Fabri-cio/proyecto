@@ -11,30 +11,31 @@ import java.util.List;
 @Service
 public class ProductoServiceImpl implements EntidadService<Producto> {
 
-    @Autowired
-    private ProductoDao productoDao;
+	@Autowired
+	private ProductoDao productoDao;
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Producto> listarEntidades() {
-        return productoDao.findAll();
-    }
+	@Override
+	@Transactional(readOnly = true)
+	public List<Producto> listarEntidades() {
+		return productoDao.findAll();
+	}
 
-    @Override
-    @Transactional
-    public void guardar(Producto producto) {
-        productoDao.save(producto);
-    }
+	@Override
+	@Transactional
+	public void guardar(Producto producto) {
+		productoDao.save(producto);
+	}
 
-    @Override
-    @Transactional
-    public void eliminar(Producto producto) {
-        productoDao.delete(producto);
-    }
+	@Override
+	@Transactional
+	public void eliminar(Producto producto) {
+		productoDao.delete(producto);
+	}
 
-    @Override
-    @Transactional(readOnly = true)
-    public Producto encontrarEntidad(Producto producto) {
-        return productoDao.findById(producto.getIdProducto()).orElse(null);
-    }
+	@Override
+	@Transactional(readOnly = true)
+	public Producto encontrarEntidad(Producto producto) {
+		return productoDao.findById(producto.getIdProducto()).orElse(null);
+	}
+
 }
