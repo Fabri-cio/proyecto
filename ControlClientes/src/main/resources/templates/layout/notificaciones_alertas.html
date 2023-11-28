@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaf.org/extras.spring-security">
+    
+   <head th:replace="~{layout/plantilla :: head}">
+        <title>Notificaciones y Alertas</title>
+    </head>
+  <body>
+      <header th:replace="~{layout/plantilla :: header}"/>
+    <div class="container mt-5">
+      <h2 class="mb-4">Notificaciones y Alertas</h2>
+
+      <!-- Área para Notificaciones de Bajo Inventario -->
+      <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Alerta de Bajo Inventario</h4>
+        <p>
+          Algunos productos tienen una cantidad baja en stock. Por favor,
+          realice un pedido de reposición.
+        </p>
+        <hr />
+        <p class="mb-0">Fecha: 2023-01-15</p>
+      </div>
+
+      <!-- Área para Notificaciones del Sistema -->
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Mensaje del Sistema</h4>
+        <p>
+          El sistema se actualizará próximamente. Por favor, guarde su trabajo
+          antes de la fecha programada.
+        </p>
+        <hr />
+        <p class="mb-0">Fecha de Actualización: 2023-02-01</p>
+      </div>
+    </div>
+      <footer th:replace="~{layout/plantilla :: footer}"/>
+  </body>
+</html>

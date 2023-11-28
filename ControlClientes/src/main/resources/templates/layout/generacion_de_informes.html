@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaf.org/extras.spring-security">
+    
+   <head th:replace="~{layout/plantilla :: head}">
+        <title>Generacion de Informes</title>
+    </head>
+  <body>
+      <header th:replace="~{layout/plantilla :: header}"/>
+    <div class="container mt-5">
+      <h2 class="mb-4">Generación de Informes</h2>
+
+      <!-- Paneles de informes -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ventas Diarias</h5>
+              <p class="card-text">Total de ventas hoy: $200.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Existencias Actuales</h5>
+              <p class="card-text">Productos en stock: 150</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ganancias y Pérdidas</h5>
+              <p class="card-text">Ganancia neta: $50.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Filtros y opciones para personalizar informes -->
+      <h4>Filtros e Opciones</h4>
+      <form>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="fechaInicio" class="form-label"
+                >Fecha de Inicio</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="fechaInicio"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="fechaFin" class="form-label">Fecha de Fin</label>
+              <input type="date" class="form-control" id="fechaFin" required />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="tipoInforme" class="form-label"
+                >Tipo de Informe</label
+              >
+              <select class="form-select" id="tipoInforme" required>
+                <option value="ventas">Ventas</option>
+                <option value="existencias">Existencias</option>
+                <option value="ganancias">Ganancias y Pérdidas</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary">
+              Generar Informe
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+      <footer th:replace="~{layout/plantilla :: footer}"/>
+  </body>
+</html>

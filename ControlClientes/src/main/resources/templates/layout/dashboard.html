@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaf.org/extras.spring-security">
+    
+   <head th:replace="~{layout/plantilla :: head}">
+        <title>Dashboard</title>
+    </head>
+  <body>
+      <header th:replace="~{layout/plantilla :: header}"/>
+    <div class="container mt-5">
+      <h2 class="mb-4">Dashboard Principal</h2>
+
+      <!-- Resumen del Estado Actual -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h4 class="card-title">Resumen del Estado Actual</h4>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted">Ventas Hoy</h6>
+                  <p class="card-text">$500.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    Productos en Stock
+                  </h6>
+                  <p class="card-text">200</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    Clientes Registrados
+                  </h6>
+                  <p class="card-text">150</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted">Ganancia Neta</h6>
+                  <p class="card-text">$200.00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accesos Rápidos -->
+      <h4 class="mb-3">Accesos Rápidos</h4>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Registrar Venta</h5>
+              <p class="card-text">Registra nuevas ventas de productos.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Gestión de Inventario</h5>
+              <p class="card-text">Administra el inventario de productos.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Reportes de Ventas</h5>
+              <p class="card-text">Genera informes detallados de las ventas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <footer th:replace="~{layout/plantilla :: footer}"/>
+  </body>
+</html>

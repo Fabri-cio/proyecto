@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaf.org/extras.spring-security">
+    
+   <head th:replace="~{layout/plantilla :: head}">
+        <title>Registro de Ventas</title>
+    </head>
+  <body>
+      <header th:replace="~{layout/plantilla :: header}"/>
+    <div class="container mt-5">
+      <h2 class="mb-4">Registro de Ventas y Transacciones</h2>
+
+      <!-- Interfaz para ver el historial de ventas y transacciones -->
+      <h4>Historial de Ventas</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID de Transacción</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Total</th>
+            <th scope="col">Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>2023-01-01</td>
+            <td>$100.00</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-info"
+                data-bs-toggle="modal"
+                data-bs-target="#detallesModal"
+              >
+                Ver Detalles
+              </button>
+            </td>
+          </tr>
+          <!-- Otras filas se agregarían aquí dinámicamente -->
+        </tbody>
+      </table>
+
+      <!-- Modal para mostrar detalles de la transacción -->
+      <div
+        class="modal fade"
+        id="detallesModal"
+        tabindex="-1"
+        aria-labelledby="detallesModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="detallesModalLabel">
+                Detalles de la Transacción
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <!-- Contenido de detalles de la transacción se agregaría aquí -->
+              <p>Productos Vendidos:</p>
+              <ul>
+                <li>Producto A - Cantidad: 2 - Precio: $50.00</li>
+                <li>Producto B - Cantidad: 1 - Precio: $30.00</li>
+              </ul>
+              <p>Total: $80.00</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <footer th:replace="~{layout/plantilla :: footer}"/>
+  </body>
+</html>
