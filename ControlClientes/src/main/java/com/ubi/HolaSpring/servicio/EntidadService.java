@@ -4,11 +4,14 @@ import java.util.List;
 
 public interface EntidadService<T> {
 
-    List<T> listarEntidades();
+	List<T> listarEntidades();
 
-    void guardar(T entidad);
+	void guardar(T entidad);
 
-    void eliminar(T entidad);
+	void eliminar(T entidad);
 
-    T encontrarEntidad(T entidad);
+	T encontrarEntidad(T entidad);
+
+	List<T> buscarProductos(String nombre);
+
 }

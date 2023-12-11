@@ -1,5 +1,6 @@
 package com.ubi.HolaSpring.web;
 
+import com.ubi.HolaSpring.domain.Categoria;
 import com.ubi.HolaSpring.domain.Persona;
 import com.ubi.HolaSpring.domain.Producto;
 import jakarta.validation.Valid;
@@ -13,6 +14,9 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.ubi.HolaSpring.servicio.EntidadService;
+import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @Slf4j // para el manejo de loggin acceso a la variable log
@@ -23,6 +27,9 @@ public class RestController {
 
 	@Autowired
 	private EntidadService<Producto> productoService;
+
+	@Autowired
+	private EntidadService<Categoria> categoriaService;
 
 	@GetMapping("/") // mapeamos la ruta donde se mostrara
 	// @AuthenticationPrincipal User user lo utilizamos para ver quien entro en consola
@@ -69,48 +76,25 @@ public class RestController {
 		return "redirect:/";
 	}
 
+	// inventario
 	@GetMapping("/layout/inventario")
 	public String inventario(Model model) {
 		var productos = productoService.listarEntidades();
+		var categorias = categoriaService.listarEntidades();
 		model.addAttribute("productos", productos);
+		model.addAttribute("categorias", categorias);
 		return "layout/inventario";
 	}
 
-	@GetMapping("/agregarProducto")
-	public String agregarProducto(Producto producto) {
-		return "modificarProducto";
-	}
-
-	@PostMapping("/guardar")
-	public String guardar(@Valid Producto producto, Errors errores) {
-		if (errores.hasErrors()) {
-			return "modificar";
-		}
-		productoService.guardar(producto);
-		return "layout/inventario";
-	}
-
-	@GetMapping("/editarProducto/{idProducto}")
-	public String editarProducto(Producto producto, Model model) {
-		producto = productoService.encontrarEntidad(producto);
-		model.addAttribute("persona", producto);
-		return "modificarProducto";
-	}
-
-	@GetMapping("/eliminarProducto/{idProducto}")
-	public String eliminarProducto(Producto producto) {
-
-		productoService.eliminar(producto);
-		return "redirect:/layout/inventario";
-	}
-
+	// ----------las vistas------------
 	@GetMapping("/layout/dashboard")
 	public String dashboard() {
 		return "layout/dashboard";
 	}
 
+	// punto de venta
 	@GetMapping("/layout/punto_de_venta")
-	public String puntoDeVenta() {
+	public String puntoDeVenta(Model model) {
 		return "layout/punto_de_venta";
 	}
 

@@ -36,6 +36,13 @@ public class ProductoServiceImpl implements EntidadService<Producto> {
 	@Transactional(readOnly = true)
 	public Producto encontrarEntidad(Producto producto) {
 		return productoDao.findById(producto.getIdProducto()).orElse(null);
+
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Producto> buscarProductos(String nombre) {
+		return productoDao.findByNombreContaining(nombre);
 	}
 
 }

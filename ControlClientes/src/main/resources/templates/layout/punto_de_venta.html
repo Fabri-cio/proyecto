@@ -1,100 +1,103 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://thymeleaf.org/extras.spring-security">
-    
-   <head th:replace="~{layout/plantilla :: head}">
-        <title>Punto de Venta</title>
-    </head>
-  <body>
-      <header th:replace="~{layout/plantilla :: header}"/>
-    <div class="container">
-      <div class="row">
-        <!-- Columna del formulario Punto de Venta -->
-        <div class="col-md-6">
-          <h2 class="mb-4">Punto de Venta</h2>
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:sec="http://thymeleaf.org/extras.spring-security">
 
-          <!-- Formulario de Registro de Productos -->
-          <form>
-            <div class="mb-3">
-              <label for="producto" class="form-label">Producto</label>
-              <input
-                type="text"
-                class="form-control"
-                id="producto"
-                placeholder="Nombre del Producto"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="cantidad" class="form-label">Cantidad</label>
-              <input
-                type="number"
-                class="form-control"
-                id="cantidad"
-                placeholder="Cantidad"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="precio" class="form-label">Precio Unitario</label>
-              <input
-                type="number"
-                class="form-control"
-                id="precio"
-                placeholder="Precio Unitario"
-                required
-              />
-            </div>
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="agregarAlCarrito()"
-            >
-              Agregar al Carrito
-            </button>
-          </form>
-        </div>
+       <head th:replace="~{layout/plantilla :: head}">
+            <title>Punto de Venta</title>
+        </head>
+      <body>
+          <header th:replace="~{layout/plantilla :: header}"/>
+        <div class="container">
+          <div class="row">
+            <!-- Columna del formulario Punto de Venta -->
+            <div class="col-md-6">
+              <h2 class="mb-4">Punto de Venta</h2>
 
-        <!-- Columna del Carrito -->
-        <div class="col-md-6">
-          <div class="mt-5">
-            <h4>Carrito</h4>
-            <ul class="list-group" id="carrito">
-              <!-- Los elementos del carrito se agregarán aquí dinámicamente -->
-            </ul>
-            <hr />
-            <div class="mb-3">
-              <label for="total" class="form-label">Total</label>
-              <input
-                type="text"
-                class="form-control"
-                id="total"
-                value="$0.00"
-                readonly
-              />
+              <!-- Formulario de Registro de Productos -->
+              <form>
+                <!-- Dentro del formulario de Registro de Productos -->
+                <div class="mb-3">
+                    <label for="producto" class="form-label">Producto</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="producto"
+                        placeholder="Nombre del Producto"
+                        required
+                        oninput="buscarProducto()"
+                    /> 
+                    <div id="resultadosBusqueda"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="cantidad" class="form-label">Cantidad</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="cantidad"
+                    placeholder="Cantidad"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="precio" class="form-label">Precio Unitario</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="precio"
+                    placeholder="Precio Unitario"
+                    required
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="agregarAlCarrito()"
+                >
+                  Agregar al Carrito
+                </button>
+              </form>
             </div>
-            <div class="mb-3">
-              <label for="descuento" class="form-label">Descuento</label>
-              <input
-                type="number"
-                class="form-control"
-                id="descuento"
-                placeholder="Descuento"
-                value="0"
-              />
+
+            <!-- Columna del Carrito -->
+            <div class="col-md-6">
+              <div class="mt-5">
+                <h4>Carrito</h4>
+                <ul class="list-group" id="carrito">
+                  <!-- Los elementos del carrito se agregarán aquí dinámicamente -->
+                </ul>
+                <hr />
+                <div class="mb-3">
+                  <label for="total" class="form-label">Total</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="total"
+                    value="$0.00"
+                    readonly
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="descuento" class="form-label">Descuento</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="descuento"
+                    placeholder="Descuento"
+                    value="0"
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  onclick="procesarVenta()"
+                >
+                  Procesar Venta
+                </button>
+              </div>
             </div>
-            <button
-              type="button"
-              class="btn btn-success"
-              onclick="procesarVenta()"
-            >
-              Procesar Venta
-            </button>
           </div>
         </div>
-      </div>
-    </div>
-      <footer th:replace="~{layout/plantilla :: footer}"/>
-  </body>
-</html>
+          <footer th:replace="~{layout/plantilla :: footer}"/>
+      </body>
+    </html>

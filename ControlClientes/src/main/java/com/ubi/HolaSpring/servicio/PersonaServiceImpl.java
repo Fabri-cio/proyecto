@@ -11,30 +11,37 @@ import java.util.List;
 @Service
 public class PersonaServiceImpl implements EntidadService<Persona> {
 
-    @Autowired
-    private PersonaDao personaDao;
+	@Autowired
+	private PersonaDao personaDao;
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Persona> listarEntidades() {
-        return personaDao.findAll();
-    }
+	@Override
+	@Transactional(readOnly = true)
+	public List<Persona> listarEntidades() {
+		return personaDao.findAll();
+	}
 
-    @Override
-    @Transactional
-    public void guardar(Persona persona) {
-        personaDao.save(persona);
-    }
+	@Override
+	@Transactional
+	public void guardar(Persona persona) {
+		personaDao.save(persona);
+	}
 
-    @Override
-    @Transactional
-    public void eliminar(Persona persona) {
-        personaDao.delete(persona);
-    }
+	@Override
+	@Transactional
+	public void eliminar(Persona persona) {
+		personaDao.delete(persona);
+	}
 
-    @Override
-    @Transactional(readOnly = true)
-    public Persona encontrarEntidad(Persona persona) {
-        return personaDao.findById(persona.getIdPersona()).orElse(null);
-    }
+	@Override
+	@Transactional(readOnly = true)
+	public Persona encontrarEntidad(Persona persona) {
+		return personaDao.findById(persona.getIdPersona()).orElse(null);
+	}
+
+	@Override
+	public List<Persona> buscarProductos(String nombre) {
+		throw new UnsupportedOperationException("Not supported yet."); // Generated from
+																		// nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+	}
+
 }

@@ -12,26 +12,31 @@ import lombok.Data;
 @Table(name = "producto")
 public class Producto implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idProducto;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idProducto;
 
-    @NotEmpty
-    private String nombreProducto;
+	@NotEmpty
+	private String nombre;
 
-    @NotNull
-    private Double precio;
+	@NotNull
+	private Double precio;
 
-    @NotNull
-    private int stock;
+	@NotNull
+	private int stock;
 
-    @NotEmpty
-    private String descripcion;
+	@ManyToOne
+	@JoinColumn(name = "id_categoria")
+	private Categoria categoria;
 
-    @NotNull
-    private Double precioUnitario;
+	// @NotEmpty
+	// private String descripcion;
+	//
+	// @NotNull
+	// private Double precioUnitario;
+	//
+	// private Double descuento;
 
-    private Double descuento;
 }
