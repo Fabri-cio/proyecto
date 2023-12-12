@@ -39,10 +39,4 @@ public class ProductoServiceImpl implements EntidadService<Producto> {
 
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<Producto> buscarProductos(String nombre) {
-		return productoDao.findByNombreContaining(nombre);
-	}
-
 }

@@ -12,6 +12,4 @@ public interface EntidadService<T> {
 
 	T encontrarEntidad(T entidad);
 
-	List<T> buscarProductos(String nombre);
-
 }

@@ -38,10 +38,4 @@ public class PersonaServiceImpl implements EntidadService<Persona> {
 		return personaDao.findById(persona.getIdPersona()).orElse(null);
 	}
 
-	@Override
-	public List<Persona> buscarProductos(String nombre) {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from
-																		// nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-	}
-
 }

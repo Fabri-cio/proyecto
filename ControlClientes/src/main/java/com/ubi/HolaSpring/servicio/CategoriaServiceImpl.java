@@ -37,10 +37,4 @@ public class CategoriaServiceImpl implements EntidadService<Categoria> {
 		return categoriaDao.findById(categoria.getIdCategoria()).orElse(null);
 	}
 
-	@Override
-	public List<Categoria> buscarProductos(String nombre) {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from
-																		// nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-	}
-
 }

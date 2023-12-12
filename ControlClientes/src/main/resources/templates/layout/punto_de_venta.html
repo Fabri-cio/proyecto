@@ -15,17 +15,22 @@
                     <h2 class="mb-4">Punto de Venta</h2>
 
                     <!-- Formulario de Registro de Productos (Modificado) -->
-                    <form>
-                        <div class="mb-3">
-                            <label for="producto" class="form-label">Producto</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="producto"
-                                placeholder="Nombre del Producto"
-                                required
-                                />
-                        </div>
+                    <form>            
+                        <div class='form-group'>
+                            <label for="producto">Producto</label>
+                            <div>
+                                <!-- Input de tipo texto con autocompletado -->
+                                <input type="text" id="productoInput" name="producto.productoInput" placeholder="Nombre del Producto" oninput="mostrarSugerencias()" list="productos">
+
+                                <!-- Datalist para asociar con el input -->
+                                <datalist id="productos">
+                                    <option th:each="producto : ${productos}" th:value="${producto.nombre}" th:text="${producto.nombre}"></option>
+                                </datalist>
+                                
+                                <!--<p th:each="producto : ${productos}" th:value="${producto.precio}" th:text="${producto.precio}"></p>-->
+                            </div>
+                        </div>        
+                        
                         <div class="mb-3">
                             <label for="cantidad" class="form-label">Cantidad</label>
                             <input
@@ -43,9 +48,9 @@
                                 class="form-control"
                                 id="precio"
                                 placeholder="Precio"
-                                required
                                 />
                         </div>
+                        
                         <button
                             type="button"
                             class="btn btn-primary"
@@ -117,11 +122,30 @@
 
         <script>
             // Función para buscar productos (Añadida)
-            function buscarProductos() {
-                // Aquí puedes implementar la lógica de búsqueda y mostrar los resultados en el textarea.
-                // Puedes usar el valor de document.getElementById('buscarProducto').value para obtener el texto de búsqueda.
-                // Y puedes actualizar el contenido del textarea con document.getElementById('resultadosBusqueda').value.
-            }
+            
+                        function mostrarSugerencias() {
+                            var input = document.getElementById("productoInput");
+                            var select = document.getElementById("producto");
+                            var sugerencias = document.getElementById("sugerencias");
+
+                            // Limpiar la lista de sugerencias
+                            sugerencias.innerHTML = "";
+
+                            // Obtener el valor actual del input
+                            var valorInput = input.value.toLowerCase();
+
+                            // Filtrar las categorías que coinciden con el valor del input
+                            var productos = Array.from(select.options).filter(function(opcion) {
+                                return opcion.text.toLowerCase().includes(valorInput);
+                            });
+
+                            // Mostrar las sugerencias
+                            productos.forEach(function(opcion) {
+                                var sugerencia = document.createElement("li");
+                                sugerencia.textContent = opcion.text;
+                                sugerencias.appendChild(sugerencia);
+                            });
+                        }
 
             // Función para agregar al carrito (Añadida)
             function agregarAlCarrito() {
