@@ -22,15 +22,15 @@
                                 <!-- Input de tipo texto con autocompletado -->
                                 <input type="text" id="productoInput" name="producto.productoInput" placeholder="Nombre del Producto" oninput="mostrarSugerencias()" list="productos">
 
-                                <!-- Datalist para asociar con el input -->
-                                <datalist id="productos">
-                                    <option th:each="producto : ${productos}" th:value="${producto.nombre}" th:text="${producto.nombre}"></option>
-                                </datalist>
-                                
-                                <!--<p th:each="producto : ${productos}" th:value="${producto.precio}" th:text="${producto.precio}"></p>-->
+                                    <!-- Datalist para asociar con el input -->
+                                    <datalist id="productos">
+                                        <option th:each="producto : ${productos}" th:value="${producto.nombre}" th:text=" ${producto.precio}"></option>
+                                    </datalist>
+
+                                    <!--<p th:each="producto : ${productos}" th:value="${producto.precio}" th:text="${producto.precio}"></p>-->
                             </div>
                         </div>        
-                        
+
                         <div class="mb-3">
                             <label for="cantidad" class="form-label">Cantidad</label>
                             <input
@@ -50,7 +50,7 @@
                                 placeholder="Precio"
                                 />
                         </div>
-                        
+
                         <button
                             type="button"
                             class="btn btn-primary"
@@ -59,52 +59,40 @@
                             Agregar al Carrito
                         </button>
                     </form>
-                </div>
-
-                <!-- Columna de Búsqueda de Productos (Modificado) -->
-                <div class="col-md-4">
-                    <h2 class="mb-4">Buscar Productos</h2>
-
-                    <!-- Campo de Búsqueda y Resultados (Añadido) -->
-                    <div class="mb-3">
-                        <label for="buscarProducto" class="form-label">Buscar Producto</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="buscarProducto"
-                            placeholder="Nombre del Producto"
-                            oninput="buscarProductos()"
-                            />
-                    </div>
-                    <textarea id="resultadosBusqueda" class="form-control" rows="5" readonly></textarea>
-                </div>
-
+                </div>            
                 <!-- Columna del Carrito -->
                 <div class="col-md-4">
-                    <div class="mt-5">
-                        <h4>Carrito</h4>
-                        <ul class="list-group" id="carrito">
-                            <!-- Los elementos del carrito se agregarán aquí dinámicamente -->
-                        </ul>
-                        <hr />
+
+                    <h2 class="mb-4">Carrito</h2>
+                    <form>
                         <div class="mb-3">
                             <label for="total" class="form-label">Total</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 id="total"
-                                value="$0.00"
+                                value="Bs 0.00"
                                 readonly
+                                />
+                        </div>  
+                        <div class="mb-3">
+                            <label for="descuento" class="form-label">Nombre del Cliente</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="nombre"
+                                placeholder="nombre"
+                                value=""
                                 />
                         </div>
                         <div class="mb-3">
-                            <label for="descuento" class="form-label">Descuento</label>
+                            <label for="descuento" class="form-label">Modo de Pago</label>
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
-                                id="descuento"
-                                placeholder="Descuento"
-                                value="0"
+                                id="pago"
+                                placeholder="tipo de pago"
+                                value=""
                                 />
                         </div>
                         <button
@@ -114,6 +102,14 @@
                             >
                             Procesar Venta
                         </button>
+                    </form>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="mt-5">
+                        <ul class="list-group" id="carrito">
+                            <!-- Los elementos del carrito se agregarán aquí dinámicamente -->
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -122,36 +118,81 @@
 
         <script>
             // Función para buscar productos (Añadida)
-            
-                        function mostrarSugerencias() {
-                            var input = document.getElementById("productoInput");
-                            var select = document.getElementById("producto");
-                            var sugerencias = document.getElementById("sugerencias");
 
-                            // Limpiar la lista de sugerencias
-                            sugerencias.innerHTML = "";
+            function mostrarSugerencias() {
+                var input = document.getElementById("productoInput");
+                var select = document.getElementById("producto");
+                var sugerencias = document.getElementById("sugerencias");
 
-                            // Obtener el valor actual del input
-                            var valorInput = input.value.toLowerCase();
+                // Limpiar la lista de sugerencias
+                sugerencias.innerHTML = "";
 
-                            // Filtrar las categorías que coinciden con el valor del input
-                            var productos = Array.from(select.options).filter(function(opcion) {
-                                return opcion.text.toLowerCase().includes(valorInput);
-                            });
+                // Obtener el valor actual del input
+                var valorInput = input.value.toLowerCase();
 
-                            // Mostrar las sugerencias
-                            productos.forEach(function(opcion) {
-                                var sugerencia = document.createElement("li");
-                                sugerencia.textContent = opcion.text;
-                                sugerencias.appendChild(sugerencia);
-                            });
-                        }
+                // Filtrar las categorías que coinciden con el valor del input
+                var productos = Array.from(select.options).filter(function (opcion) {
+                    return opcion.text.toLowerCase().includes(valorInput);
+                });
+
+                // Mostrar las sugerencias
+                productos.forEach(function (opcion) {
+                    var sugerencia = document.createElement("li");
+                    sugerencia.textContent = opcion.text;
+                    sugerencias.appendChild(sugerencia);
+                });
+            }
 
             // Función para agregar al carrito (Añadida)
             function agregarAlCarrito() {
-                // Aquí puedes implementar la lógica para agregar elementos al carrito.
-                // Puedes obtener los valores de los campos (nombre, cantidad, precio) y actualizar la lista de carrito.
-                // También puedes actualizar el total y cualquier otra lógica relacionada con la venta.
+                // Obtener los valores del formulario
+                var productoInput = document.getElementById("productoInput");
+                var cantidadInput = document.getElementById("cantidad");
+                var precioInput = document.getElementById("precio");
+
+                // Verificar que se haya seleccionado un producto
+                if (productoInput.value.trim() === "") {
+                    alert("Por favor, seleccione un producto.");
+                    return;
+                }
+
+                // Obtener los valores de los campos
+                var producto = productoInput.value;
+                var cantidad = parseInt(cantidadInput.value) || 0; // Convertir a entero, default a 0 si no es un número
+                var precio = parseFloat(precioInput.value) || 0.0; // Convertir a flotante, default a 0.0 si no es un número
+
+                // Calcular el subtotal del producto
+                var subtotal = cantidad * precio;
+
+                // Crear un nuevo elemento para el carrito
+                var carritoItem = document.createElement("li");
+                carritoItem.className = "list-group-item";
+                carritoItem.textContent = `${cantidad}x ${producto} - Subtotal: $${subtotal.toFixed(2)}`;
+
+                // Agregar el elemento al carrito
+                var carrito = document.getElementById("carrito");
+                carrito.appendChild(carritoItem);
+
+                // Actualizar el total
+                actualizarTotal(subtotal);
+            }
+
+            function actualizarTotal(subtotal) {
+                // Obtener el elemento del total
+                var totalInput = document.getElementById("total");
+
+                // Obtener todos los elementos de la lista del carrito
+                var carritoItems = document.querySelectorAll("#carrito li");
+
+                // Calcular el nuevo total sumando los subtotales de todos los productos en el carrito
+                var nuevoTotal = 0;
+                carritoItems.forEach(function (item) {
+                    var subtotal = parseFloat(item.textContent.split(": $")[1]);
+                    nuevoTotal += subtotal;
+                });
+
+                // Actualizar el valor del total en el campo
+                totalInput.value = `$${nuevoTotal.toFixed(2)}`;
             }
 
             // Función para procesar la venta (Añadida)
